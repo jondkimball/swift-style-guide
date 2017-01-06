@@ -598,7 +598,7 @@ private func makeLocationManager() -> CLLocationManager {
 
 ### Type Inference
 
-Prefer compact code and let the compiler infer the type for constants or variables of single instances. Type inference is also appropriate for small (non-empty) arrays and dictionaries. When required, specify the specific type such as `CGFloat` or `Int16`.
+Prefer compact code and let the compiler infer the type for constants or variables of single instances. Type inference is also appropriate for small (non-empty) arrays and dictionaries. For compiler optimization, Type inference is also appropriate MUST be used for array and dictionary literals. When required, specify the specific type such as `CGFloat` or `Int16`.
 
 **Preferred:**
 ```swift
@@ -623,6 +623,22 @@ For empty arrays and dictionaries, use type annotation. (For an array or diction
 ```swift
 var names: [String] = []
 var lookup: [String: Int] = [:]
+```
+
+**Not Preferred:**
+```swift
+var names = [String]()
+var lookup = [String: Int]()
+```
+
+#### Type Annotation for Arrays and Dictionaries literals
+
+For arrays and dictionaries literals, use type annotation. Swift is badly optimized for literals. Using type annotation will massivley reduce compile time.
+
+**Preferred:**
+```swift
+var employees: [String] = ["Jon", "Fangzhou", "Chad"]
+var favoriteColors: [String: String] = ["Jon":"Purple", "Fangzhou":"Green", "Chad","Red"]
 ```
 
 **Not Preferred:**
